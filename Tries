@@ -1,0 +1,47 @@
+You are given a list of N phone numbers
+You must make sure that the phonebook is consistent.
+The phonebook is said to be consistent when no number in the phonebook is a prefix of any other number
+This is necessary since if any number is a prefix of any other number it will be redirected to that 
+number while dialing
+For example:
+A: 1234
+B: 12
+Suppose we want to dial A we start dialing 1->2 and at this point we will be directed to be since the number 12 corresponds to B.
+In this case the phonebook is said to be inconsistent
+ 
+
+Input Description:
+The first line contains a single integer N denoting the number of phone numbers in the phonebook The next N line contains a single phone number per line . Each phone number contains 20 digits at most
+
+Output Description:
+The output must consist of a single line containing “Consistent” (without quotes) if the phonebook was consistent or “Inconsistent” (without quotes) if the phonebook was inconsistent
+
+Sample Input :
+2
+1234
+12
+Sample Output :
+Inconsistent
+
+
+Solution:::
+n = int(input())
+l = []
+for i in range(n):
+    l.append(int(input()))
+l.sort()
+l = [str(i) for i in l]
+flag = True
+for i in range(n):
+    for j in range(i+1, n):
+        if len(l[i]) <= len(l[j]):
+            if l[i] == l[j][0:len(l[i])]:
+                flag = False
+                break
+        if len(l[i]) > len(l[j]):
+            if l[j] == l[i][0:len(l[j])]:
+                flag = False
+                break
+if flag:print("Consistent")
+else:print("Inconsistent")
+
